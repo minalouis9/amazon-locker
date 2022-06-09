@@ -3,39 +3,28 @@ import 'package:flutter/material.dart';
 
 class BaseScaffold extends StatelessWidget {
   final Widget body;
-  final String? screenTitle;
-  final Widget? title;
-  final bool enableAppBar;
   final bool disableDefaultPadding;
   final bool disableSafeArea;
   final bool enableDrawer;
-  final List<Widget> drawerItems;
+  final PreferredSizeWidget? appBar;
+  final Widget? drawerItems;
+  final GlobalKey<ScaffoldState>? scaffoldKey;
 
-  BaseScaffold(
+  const BaseScaffold(
       {Key? key,
       required this.body,
-      this.title,
-      this.screenTitle,
-        this.enableAppBar = true,
       this.disableDefaultPadding = false,
       this.disableSafeArea = false,
       this.enableDrawer = false,
-      this.drawerItems = const []})
-      : super(key: key) {
-    if (screenTitle != null) {
-      assert(title == null);
-    }
-    if (title != null) {
-      assert(screenTitle == null);
-    }
-  }
+        this.appBar,
+      this.drawerItems, this.scaffoldKey})
+      : super(key: key);
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: enableAppBar ? BaseAppBar(
-        title: screenTitle != null ? Text(screenTitle!) : title,
-      ) : null,
+      key: scaffoldKey,
+      appBar: appBar,
       body: disableSafeArea
           ? disableDefaultPadding
               ? body
@@ -53,14 +42,7 @@ class BaseScaffold extends StatelessWidget {
             ),
       drawer: enableDrawer
           ? Drawer(
-              child: Column(
-                children: [
-                  const DrawerHeader(
-                    child: CircleAvatar(),
-                  ),
-                  ...drawerItems
-                ],
-              ),
+              child: drawerItems,
             )
           : null,
     );

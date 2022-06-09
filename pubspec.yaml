@@ -42,6 +42,9 @@ dependencies:
   json_serializable:
   freezed_annotation: ^0.15.0
 
+  carousel_slider:
+
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
