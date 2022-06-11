@@ -22,10 +22,7 @@ class _$ResponseModelTearOff {
   const _$ResponseModelTearOff();
 
   _ResponseModel call(
-      {required String? message,
-      int? statusCode,
-      Map<String, dynamic>? data,
-      Map<String, dynamic>? error}) {
+      {String? message, int? statusCode, dynamic data, String? error}) {
     return _ResponseModel(
       message: message,
       statusCode: statusCode,
@@ -46,8 +43,8 @@ const $ResponseModel = _$ResponseModelTearOff();
 mixin _$ResponseModel {
   String? get message => throw _privateConstructorUsedError;
   int? get statusCode => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get data => throw _privateConstructorUsedError;
-  Map<String, dynamic>? get error => throw _privateConstructorUsedError;
+  dynamic get data => throw _privateConstructorUsedError;
+  String? get error => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -60,11 +57,7 @@ abstract class $ResponseModelCopyWith<$Res> {
   factory $ResponseModelCopyWith(
           ResponseModel value, $Res Function(ResponseModel) then) =
       _$ResponseModelCopyWithImpl<$Res>;
-  $Res call(
-      {String? message,
-      int? statusCode,
-      Map<String, dynamic>? data,
-      Map<String, dynamic>? error});
+  $Res call({String? message, int? statusCode, dynamic data, String? error});
 }
 
 /// @nodoc
@@ -95,11 +88,11 @@ class _$ResponseModelCopyWithImpl<$Res>
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as dynamic,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as String?,
     ));
   }
 }
@@ -111,11 +104,7 @@ abstract class _$ResponseModelCopyWith<$Res>
           _ResponseModel value, $Res Function(_ResponseModel) then) =
       __$ResponseModelCopyWithImpl<$Res>;
   @override
-  $Res call(
-      {String? message,
-      int? statusCode,
-      Map<String, dynamic>? data,
-      Map<String, dynamic>? error});
+  $Res call({String? message, int? statusCode, dynamic data, String? error});
 }
 
 /// @nodoc
@@ -148,11 +137,11 @@ class __$ResponseModelCopyWithImpl<$Res>
       data: data == freezed
           ? _value.data
           : data // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as dynamic,
       error: error == freezed
           ? _value.error
           : error // ignore: cast_nullable_to_non_nullable
-              as Map<String, dynamic>?,
+              as String?,
     ));
   }
 }
@@ -161,7 +150,7 @@ class __$ResponseModelCopyWithImpl<$Res>
 @JsonSerializable()
 class _$_ResponseModel implements _ResponseModel {
   const _$_ResponseModel(
-      {required this.message, this.statusCode, this.data, this.error});
+      {this.message, this.statusCode, this.data, this.error});
 
   factory _$_ResponseModel.fromJson(Map<String, dynamic> json) =>
       _$$_ResponseModelFromJson(json);
@@ -171,9 +160,9 @@ class _$_ResponseModel implements _ResponseModel {
   @override
   final int? statusCode;
   @override
-  final Map<String, dynamic>? data;
+  final dynamic data;
   @override
-  final Map<String, dynamic>? error;
+  final String? error;
 
   @override
   String toString() {
@@ -189,16 +178,12 @@ class _$_ResponseModel implements _ResponseModel {
             (identical(other.statusCode, statusCode) ||
                 other.statusCode == statusCode) &&
             const DeepCollectionEquality().equals(other.data, data) &&
-            const DeepCollectionEquality().equals(other.error, error));
+            (identical(other.error, error) || other.error == error));
   }
 
   @override
-  int get hashCode => Object.hash(
-      runtimeType,
-      message,
-      statusCode,
-      const DeepCollectionEquality().hash(data),
-      const DeepCollectionEquality().hash(error));
+  int get hashCode => Object.hash(runtimeType, message, statusCode,
+      const DeepCollectionEquality().hash(data), error);
 
   @JsonKey(ignore: true)
   @override
@@ -213,10 +198,10 @@ class _$_ResponseModel implements _ResponseModel {
 
 abstract class _ResponseModel implements ResponseModel {
   const factory _ResponseModel(
-      {required String? message,
+      {String? message,
       int? statusCode,
-      Map<String, dynamic>? data,
-      Map<String, dynamic>? error}) = _$_ResponseModel;
+      dynamic data,
+      String? error}) = _$_ResponseModel;
 
   factory _ResponseModel.fromJson(Map<String, dynamic> json) =
       _$_ResponseModel.fromJson;
@@ -226,9 +211,9 @@ abstract class _ResponseModel implements ResponseModel {
   @override
   int? get statusCode;
   @override
-  Map<String, dynamic>? get data;
+  dynamic get data;
   @override
-  Map<String, dynamic>? get error;
+  String? get error;
   @override
   @JsonKey(ignore: true)
   _$ResponseModelCopyWith<_ResponseModel> get copyWith =>

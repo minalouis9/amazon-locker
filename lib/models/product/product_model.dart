@@ -10,10 +10,11 @@ part 'product_model.g.dart';
 @immutable
 class ProductModel with _$ProductModel {
   const factory ProductModel(
-      {required String title,
-        required String description,
-        required String imageUrl,
-        required double price}) = _ProductModel;
+      {required int id,
+        @JsonKey(name: 'product_name') required String title,
+        @JsonKey(name: 'product_description') required String description,
+        @JsonKey(name: 'product_image') required String imageUrl,
+        @JsonKey(name: 'product_price') required int price}) = _ProductModel;
 
   factory ProductModel.fromJson(Map<String, dynamic> json) =>
       _$ProductModelFromJson(json);

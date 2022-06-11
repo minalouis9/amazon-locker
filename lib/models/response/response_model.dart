@@ -10,10 +10,10 @@ part 'response_model.g.dart';
 @immutable
 class ResponseModel with _$ResponseModel {
   const factory ResponseModel(
-      {required String? message,
+      {String? message,
         int? statusCode,
-        Map<String, dynamic>? data,
-        Map<String, dynamic>? error}) = _ResponseModel;
+        dynamic data,
+        String? error}) = _ResponseModel;
 
   factory ResponseModel.fromJson(Map<String, dynamic> json) =>
       _$ResponseModelFromJson(json);

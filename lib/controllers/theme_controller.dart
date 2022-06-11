@@ -47,6 +47,9 @@ class AppThemeController extends ChangeNotifier {
     ),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(brightness: Brightness.dark),
+    snackBarTheme: SnackBarThemeData(
+      contentTextStyle: TextStyle(color: Colors.white)
+    ),
   );
 
   final ThemeData lightTheme = ThemeData(
@@ -93,6 +96,9 @@ class AppThemeController extends ChangeNotifier {
     ),
     colorScheme:
         ColorScheme.fromSwatch().copyWith(brightness: Brightness.light),
+    snackBarTheme: SnackBarThemeData(
+        contentTextStyle: TextStyle(color: Colors.white)
+    ),
   );
   ThemeMode themeMode;
 

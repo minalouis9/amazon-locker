@@ -43,6 +43,18 @@ dependencies:
   freezed_annotation: ^0.15.0
 
   carousel_slider:
+  flutter_map: ^1.0.0
+  map_launcher: ^2.2.3
+  flutter_svg:
+  font_awesome_flutter:
+  material_design_icons_flutter:
+  community_material_icon:
+
+  # For Firebase
+  firebase_core:
+  firebase_messaging:
+  mutex:
+  flutter_local_notifications:
 
 
 dev_dependencies:
@@ -72,7 +84,10 @@ flutter:
   uses-material-design: true
 
   # To add assets to your application, add an assets section, like this:
-  # assets:
+  assets:
+    - assets/logo.png
+    - assets/logo1.png
+    - assets/uni_logo.png
   #   - images/a_dot_burr.jpeg
   #   - images/a_dot_ham.jpeg
 

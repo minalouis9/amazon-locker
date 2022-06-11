@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "877407473588",
+    "project_id": "locker-ef2a2",
+    "storage_bucket": "locker-ef2a2.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:877407473588:android:7e42e2d7be27cba2b5ece1",
+        "android_client_info": {
+          "package_name": "com.example.amazon_locker"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "877407473588-bqm5e4n253lm8bo1t95ek71os96khjob.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAcgtgKsy0A76qTqTih2jG-Z99Kcb6brJE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "877407473588-bqm5e4n253lm8bo1t95ek71os96khjob.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

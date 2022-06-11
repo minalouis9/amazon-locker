@@ -1,5 +1,6 @@
 import 'dart:io';
 
+import 'package:amazon_locker/models/orders/order_model.dart';
 import 'package:amazon_locker/models/product/product_model.dart';
 import 'package:amazon_locker/navigation/route_paths.dart';
 import 'package:amazon_locker/screens/screens_index.dart';
@@ -24,6 +25,19 @@ class RouteGenerator {
       case RoutePaths.singleProductScreen:
         final args = settings.arguments as ProductModel;
         return _navigate(SingleProductScreen(product: args));
+
+      case RoutePaths.locationsScreens:
+        final args = settings.arguments as int;
+        return _navigate(LocationScreen(productId: args));
+
+      case RoutePaths.myOrdersScreen:
+        return _navigate(const MyOrdersScreen());
+      case RoutePaths.singleOrderScreen:
+        final args = settings.arguments as OrderModel;
+        return _navigate(SingleOrderScreen(order: args));
+
+      case RoutePaths.allLocationsScreen:
+        return _navigate(const AllLocationsScreen());
 
       default:
         return _navigate(const HomeScreen());

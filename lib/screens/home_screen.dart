@@ -1,8 +1,11 @@
 import 'package:amazon_locker/models/product/product_model.dart';
 import 'package:amazon_locker/navigation/route_paths.dart';
+import 'package:amazon_locker/providers/account_provider.dart';
 import 'package:amazon_locker/providers/app_theme_provider.dart';
+import 'package:amazon_locker/providers/products_provider.dart';
 import 'package:amazon_locker/widgets/base_widgets/appbar.dart';
 import 'package:amazon_locker/widgets/base_widgets/scaffold.dart';
+import 'package:amazon_locker/widgets/logo.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -20,7 +23,20 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
   final _scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
+  initState(){
+    super.initState();
+    final productsController = ref.read(productsProvider.notifier);
+    if(productsController.models.isEmpty){
+      productsController.getAllProducts();
+    }
+
+  }
+
+  @override
   Widget build(BuildContext context) {
+    final accountController = ref.watch(accountProvider);
+    final productsState = ref.watch(productsProvider);
+
     return BaseScaffold(
       scaffoldKey: _scaffoldKey,
       enableDrawer: true,
@@ -49,14 +65,15 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,
-                children: const [
+                children: [
                   Text(
-                    'Hello Mina!',
+                    'Hello ${accountController.currentUser!.name}',
                     style:
                         TextStyle(fontSize: 17.0, fontWeight: FontWeight.bold),
                   ),
+                  const SizedBox(height: 3.0),
                   Text(
-                    'Good Morning!',
+                    'Welcome back!',
                     style: TextStyle(
                         fontSize: 14.0,
                         color: Color(0xFFAEB1C1),
@@ -142,47 +159,164 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
           const SizedBox(height: 20.0),
           Expanded(
-            child: ListView.separated(
-              itemCount: 5,
-              itemBuilder: (BuildContext context, int index) => ProductCard(
-                product: ProductModel(
-                    title: 'Lenovo Yoga 920 13/Core i7/16GB/SSD 1TB',
-                    description: 'description',
-                    imageUrl: 'imageUrl',
-                    price: 959.00),
-              ),
-              separatorBuilder: (BuildContext context, int index) =>
-                  const SizedBox(height: 16.0),
-            ),
+            child: productsState.when(
+                loading: () => Center(child: CircularProgressIndicator()),
+                error: (error) => Center(child: Text(error)),
+                data: (data) => ListView.separated(
+                      itemCount: 5,
+                      itemBuilder: (BuildContext context, int index) =>
+                          ProductCard(
+                        product: data.elementAt(index),
+                      ),
+                      separatorBuilder: (BuildContext context, int index) =>
+                          const SizedBox(height: 16.0),
+                    )),
           )
         ],
       ),
-      drawerItems: Column(
-        children: [
-          const SizedBox(height: 200.0),
-          Expanded(
-            child: SingleChildScrollView(
-              child: Column(
-                children: [
-                  TextButton(
-                      key: UniqueKey(),
-                      onPressed: () {
-                        // Navigator.pop(context);
-                        ref.read(appThemeProvider).changeAppTheme();
-                      },
-                      child: Text('Change theme')),
-                  TextButton(
-                      key: UniqueKey(),
-                      onPressed: () {
-                        Navigator.pushNamedAndRemoveUntil(
-                            context, RoutePaths.loginScreen, (route) => false);
-                      },
-                      child: Text('Logout')),
-                ],
+      drawerItems: SafeArea(
+        child: Column(
+          children: [
+            Container(
+              height: 150.0,
+              margin: const EdgeInsets.all(10.0),
+              padding: const EdgeInsets.all(10.0),
+              decoration: BoxDecoration(
+                  color: Colors.grey.withOpacity(0.3),
+                  borderRadius: BorderRadius.circular(10.0)
+              ),
+              child: Center(
+                child: Row(
+                  mainAxisSize: MainAxisSize.min,
+                  children: [
+                    Logo(),
+                    // Hero(
+                    //   tag: 'logo',
+                    //   child: Text(
+                    //     'Amazon\nLocker'.toUpperCase(),
+                    //     style: const TextStyle(
+                    //         fontSize: 28.0, fontWeight: FontWeight.bold),
+                    //     textAlign: TextAlign.center,
+                    //   ),
+                    // ),
+                    // const SizedBox(width: 5.0),
+                    // Icon(Icons.lock_outline, size: 60.0,),
+                  ],
+                ),
               ),
             ),
-          ),
-        ],
+            Expanded(
+              child: Container(
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(10.0),
+                decoration: BoxDecoration(
+                    color: Colors.grey.withOpacity(0.3),
+                    borderRadius: BorderRadius.circular(10.0)
+                ),
+                child: Column(
+                  children: [
+                    Expanded(
+                      child: SingleChildScrollView(
+                        child: Column(
+                          children: [
+                            // TextButton(
+                            //     key: UniqueKey(),
+                            //     style: TextButton.styleFrom(
+                            //       primary: Colors.white,
+                            //       backgroundColor: Colors.blue,
+                            //       shape: RoundedRectangleBorder(
+                            //         borderRadius: BorderRadius.circular(10.0)
+                            //       ),
+                            //       fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
+                            //     ),
+                            //     onPressed: () {
+                            //       // Navigator.pop(context);
+                            //       ref.read(appThemeProvider).changeAppTheme();
+                            //     },
+                            //     child: Row(
+                            //       children: [
+                            //         Icon(Icons.brightness_4_outlined),
+                            //         const SizedBox(width: 10.0),
+                            //         Expanded(child: Text('Change theme')),
+                            //         Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
+                            //       ],
+                            //     )),
+                            TextButton(
+                                key: UniqueKey(),
+                                style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0)
+                                    ),
+                                    fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, RoutePaths.allLocationsScreen);
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.pin_drop_outlined),
+                                    const SizedBox(width: 10.0),
+                                    Expanded(child: Text('All Locations')),
+                                    Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
+                                  ],
+                                )),
+                            TextButton(
+                                key: UniqueKey(),
+                                style: TextButton.styleFrom(
+                                    primary: Colors.white,
+                                    backgroundColor: Colors.blue,
+                                    shape: RoundedRectangleBorder(
+                                        borderRadius: BorderRadius.circular(10.0)
+                                    ),
+                                    fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
+                                ),
+                                onPressed: () {
+                                  Navigator.pop(context);
+                                  Navigator.pushNamed(context, RoutePaths.myOrdersScreen);
+                                },
+                                child: Row(
+                                  children: [
+                                    Icon(Icons.shopping_bag_outlined),
+                                    const SizedBox(width: 10.0),
+                                    Expanded(child: Text('My Orders')),
+                                    Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
+                                  ],
+                                )),
+                          ],
+                        ),
+                      ),
+                    ),
+                    TextButton(
+                        key: UniqueKey(),
+                        style: TextButton.styleFrom(
+                            primary: Colors.white,
+                            backgroundColor: Colors.blue,
+                            shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(10.0)
+                            ),
+                            fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
+                        ),
+                        onPressed: () {
+                          Navigator.pushNamedAndRemoveUntil(
+                              context, RoutePaths.loginScreen, (route) => false);
+                        },
+                        child: Row(
+                          children: [
+                            Icon(Icons.exit_to_app_outlined),
+                            const SizedBox(width: 10.0),
+                            Expanded(child: Text('Logout')),
+                            Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
+                          ],
+                        ),),
+                  ],
+                ),
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
@@ -201,13 +335,18 @@ class ProductCard extends StatelessWidget {
       child: Container(
         height: 95.0,
         padding: EdgeInsets.all(6.0),
-        decoration: BoxDecoration(color: Colors.transparent),
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(10.0),
+            color: Colors.grey.withOpacity(0.2)),
         child: Row(
           children: [
             Container(
               height: 80.0,
               width: 80.0,
-              color: Colors.grey,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10.0),
+                image: DecorationImage(image: NetworkImage(product.imageUrl), fit: BoxFit.cover)
+              ),
             ),
             const SizedBox(width: 10.0),
             Expanded(

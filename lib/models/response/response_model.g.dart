@@ -10,8 +10,8 @@ _$_ResponseModel _$$_ResponseModelFromJson(Map<String, dynamic> json) =>
     _$_ResponseModel(
       message: json['message'] as String?,
       statusCode: json['statusCode'] as int?,
-      data: json['data'] as Map<String, dynamic>?,
-      error: json['error'] as Map<String, dynamic>?,
+      data: json['data'],
+      error: json['error'] as String?,
     );
 
 Map<String, dynamic> _$$_ResponseModelToJson(_$_ResponseModel instance) =>

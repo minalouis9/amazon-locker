@@ -1,5 +1,6 @@
 import 'package:amazon_locker/navigation/route_paths.dart';
 import 'package:amazon_locker/widgets/base_widgets/scaffold.dart';
+import 'package:amazon_locker/widgets/logo.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -23,7 +24,6 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
   @override
   Widget build(BuildContext context) {
     return BaseScaffold(
-      disableSafeArea: true,
       disableDefaultPadding: true,
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -32,16 +32,23 @@ class _SplashScreenState extends ConsumerState<SplashScreen> {
           mainAxisAlignment: MainAxisAlignment.center,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Hero(
-              tag: 'logo',
-              child: Text(
-                'Amazon\nLocker'.toUpperCase(),
-                style: const TextStyle(fontSize: 28.0, fontWeight: FontWeight.bold),
-                textAlign: TextAlign.center,
-              ),
+            const SizedBox(height: 150.0),
+            Logo(
+              width: 300.0,
+              height: 300.0,
             ),
             const SizedBox(height: 15.0),
-            const CircularProgressIndicator()
+            const CircularProgressIndicator(),
+            const SizedBox(height: 15.0),
+            Expanded(
+                child: Container(
+                  alignment: Alignment.bottomCenter,
+                  child: Image.asset(
+              'assets/uni_logo.png',
+              width: 100.0,
+              height: 100.0,
+            ),
+                )),
           ],
         ),
       ),

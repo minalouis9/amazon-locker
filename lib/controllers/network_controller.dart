@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:amazon_locker/helpers/dio_log_interceptor.dart';
@@ -12,10 +13,13 @@ class NetworkController {
 
   late Dio _dio;
 
-  final Map<String, dynamic> fixedHeaders = {'Accept': 'application/json'};
+  final Map<String, dynamic> fixedHeaders = {
+    "Accept": "application/json",
+    "Content-Type": "application/json"
+  };
 
   NetworkController({required this.ref, required this.baseUrl}) {
-   var options = BaseOptions(
+    var options = BaseOptions(
         connectTimeout: 5000,
         receiveTimeout: 5000,
         receiveDataWhenStatusError: true);
@@ -53,7 +57,7 @@ class NetworkController {
           queryParameters: queryParam,
           options: Options(headers: fixedHeaders));
 
-      data.addAll(response.data);
+      data['data'] = response.data;
       data['statusCode'] = response.statusCode;
 
       if (returnFormattedResponse) {
@@ -124,24 +128,16 @@ class NetworkController {
         map.addAll(body);
       }
 
-      if (files != null) {
-        map[files.keys.first] = [];
-        for (MultipartFile file in files.values.first) {
-          map[files.keys.first].add(file);
-        }
-      }
-
-      var formData = FormData.fromMap(map);
       Response response = await _dio.post(fullPath,
           cancelToken: cancelToken,
           queryParameters: queryParam,
-          data: formData,
+          data: jsonEncode(map),
           options: Options(headers: fixedHeaders),
           onSendProgress: monitorSendProgress ? (int sent, int total) {} : null,
           onReceiveProgress:
               monitorReceiveProgress ? (int received, int total) {} : null);
 
-      data.addAll(response.data);
+      data['data'] = response.data;
       data['statusCode'] = response.statusCode;
 
       if (returnFormattedResponse) {
@@ -169,8 +165,6 @@ class NetworkController {
     try {
       queryParam ??= {};
 
-      queryParam['_method'] = 'PUT';
-
       if (headers != null) {
         fixedHeaders.addAll(headers);
       }
@@ -187,21 +181,13 @@ class NetworkController {
         map.addAll(body);
       }
 
-      if (files != null) {
-        map[files.keys.first] = [];
-        for (MultipartFile file in files.values.first) {
-          map[files.keys.first].add(file);
-        }
-      }
-
-      var formData = FormData.fromMap(map);
-      Response response = await _dio.post(fullPath,
+      Response response = await _dio.put(fullPath,
           cancelToken: cancelToken,
           queryParameters: queryParam,
-          data: formData,
+          data: jsonEncode(map),
           options: Options(headers: fixedHeaders));
 
-      data.addAll(response.data);
+      data['data'] = response.data;
       data['statusCode'] = response.statusCode;
 
       if (returnFormattedResponse) {
@@ -240,10 +226,10 @@ class NetworkController {
       Response response = await _dio.delete(fullPath,
           cancelToken: cancelToken,
           queryParameters: queryParam,
-          data: body,
+          data: jsonEncode(body),
           options: Options(headers: fixedHeaders));
 
-      data.addAll(response.data);
+      data['data'] = response.data;
       data['statusCode'] = response.statusCode;
 
       if (returnFormattedResponse) {
