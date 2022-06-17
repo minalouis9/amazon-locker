@@ -15,8 +15,7 @@ class LocationController extends StateNotifier<GeneralState>{
     try{
       final ResponseModel response = await ref.read(apiProvider).getAllLocations();
       if(response.statusCode == 200){
-        locations.addAll((response.data! as List).map((e) => LocationModel.fromJson(e)).toList());
-        state = GeneralState.data(locations);
+        state = GeneralState.data((response.data! as List).map((e) => LocationModel.fromJson(e)).toList());
       }else{
         throw response.error!;
       }

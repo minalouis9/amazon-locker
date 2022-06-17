@@ -42,7 +42,7 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       borderRadius: BorderRadius.circular(40.0)
                     ),
                       child: Logo())),
-                  const SizedBox(height: 20.0),
+                  const SizedBox(height: 50.0),
                   // Text(
                   //   'Let’s Sign You In',
                   //   style: TextStyle(fontSize: 24.0, fontWeight: FontWeight.w700),
@@ -63,50 +63,44 @@ class _LoginScreenState extends ConsumerState<LoginScreen> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 50.0,
-                            child: TextFormField(
-                              controller: _emailController,
-                              decoration: InputDecoration(
-                                label: Text('Email'),
-                                hintText: 'johnsmith@example.com',
-                                prefixIcon: Icon(Icons.person_outline),
-                              ),
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Can't be empty";
-                                }
-                                return null;
-                              },
+                          TextFormField(
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                              label: Text('Email'),
+                              hintText: 'johnsmith@example.com',
+                              prefixIcon: Icon(Icons.person_outline),
                             ),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Can't be empty";
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 25.0),
-                          SizedBox(
-                            height: 50.0,
-                            child: TextFormField(
-                              controller: _passwordController,
-                              obscureText: !_isPasswordVisible,
-                              decoration: InputDecoration(
-                                  label: Text('Password'),
-                                  prefixIcon: Icon(Icons.lock_outline),
-                                  suffixIcon: IconButton(
-                                      onPressed: () => setState(() =>
-                                          _isPasswordVisible =
-                                              !_isPasswordVisible),
-                                      icon: Icon(_isPasswordVisible
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined))),
-                              autovalidateMode:
-                                  AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Can't be empty";
-                                }
-                                return null;
-                              },
-                            ),
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: !_isPasswordVisible,
+                            decoration: InputDecoration(
+                                label: Text('Password'),
+                                prefixIcon: Icon(Icons.lock_outline),
+                                suffixIcon: IconButton(
+                                    onPressed: () => setState(() =>
+                                        _isPasswordVisible =
+                                            !_isPasswordVisible),
+                                    icon: Icon(_isPasswordVisible
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined))),
+                            autovalidateMode:
+                                AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Can't be empty";
+                              }
+                              return null;
+                            },
                           ),
                           // const SizedBox(height: 5.0),
                           // Row(

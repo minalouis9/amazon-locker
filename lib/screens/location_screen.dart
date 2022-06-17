@@ -27,10 +27,12 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
   @override
   initState() {
     super.initState();
-    final locationController = ref.read(locationsProvider.notifier);
-    if (locationController.locations.isEmpty) {
+    WidgetsBinding.instance?.addPostFrameCallback((_) {
+      final locationController = ref.read(locationsProvider.notifier);
+      // if (locationController.locations.isEmpty) {
       locationController.getAllLocations();
-    }
+      //   }
+    });
   }
 
   @override
@@ -56,14 +58,14 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                           TextButton(
                         style: TextButton.styleFrom(
                             primary: Colors.white,
-                            backgroundColor: data.elementAt(index).active == 1
+                            backgroundColor: data.elementAt(index).active == 1 && data.elementAt(index).remainingLockers != 0
                                 ? Colors.black
                                 : Colors.grey.withOpacity(0.2),
                             padding: EdgeInsetsDirectional.only(
                                 start: 20.0, end: 10.0),
                             shape: RoundedRectangleBorder(
                                 borderRadius: BorderRadius.circular(10.0))),
-                        onPressed: data.elementAt(index).active == 1
+                        onPressed: data.elementAt(index).active == 1 && data.elementAt(index).remainingLockers != 0
                             ? () => setState(() {
                                   if (_selectedLocation ==
                                       data.elementAt(index).id) {
@@ -75,6 +77,7 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                                 })
                             : null,
                         child: Row(
+                          crossAxisAlignment: CrossAxisAlignment.center,
                           children: [
                             if (_selectedLocation == data.elementAt(index).id)
                               Row(
@@ -91,7 +94,15 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                                   const SizedBox(width: 10.0)
                                 ],
                               ),
-                            Expanded(child: Text(data.elementAt(index).name)),
+                            Expanded(child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(data.elementAt(index).name, style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold), maxLines: 1, overflow: TextOverflow.ellipsis,),
+                                const SizedBox(height: 5.0),
+                                Text('Lockers available: ${data.elementAt(index).remainingLockers}/${data.elementAt(index).lockersCount}')
+                              ],
+                            )),
                             GestureDetector(
                                 onTap: () {
                                   MapsSheet.show(
@@ -139,8 +150,8 @@ class _LocationScreenState extends ConsumerState<LocationScreen> {
                           ));
                           Navigator.pop(context);
                           Navigator.pop(context);
-                          // Navigator.pushNamed(
-                          //     context, RoutePaths.singleOrderScreen,arguments: response.data['']);
+                          Navigator.pushNamed(
+                              context, RoutePaths.myOrdersScreen);
                         } else {
                           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
                             content: Text(response.error!),

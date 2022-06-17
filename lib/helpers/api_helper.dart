@@ -1,6 +1,7 @@
 import 'package:amazon_locker/controllers/network_controller.dart';
 import 'package:amazon_locker/models/user/user_model.dart';
 import 'package:dio/dio.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 class ApiHelper {
   final NetworkController networkController;
@@ -79,9 +80,12 @@ class ApiHelper {
       {required String email,
       required String password,
       required String name}) async {
-    return networkController.postData(
-        path: '/auth/register',
-        body: {'email': email, 'password': password, 'name': name});
+    return networkController.postData(path: '/auth/register', body: {
+      'email': email,
+      'password': password,
+      'name': name,
+      'fcmToken': await FirebaseMessaging.instance.getToken()
+    });
   }
 
   Future getAllOrders({required UserModel user}) async {

@@ -13,6 +13,8 @@ _$_LocationModel _$$_LocationModelFromJson(Map<String, dynamic> json) =>
       lat: (json['lat'] as num).toDouble(),
       lng: (json['lng'] as num).toDouble(),
       active: json['active'] as int,
+      lockersCount: json['lockersCount'] as int,
+      remainingLockers: json['remainingLockers'] as int,
     );
 
 Map<String, dynamic> _$$_LocationModelToJson(_$_LocationModel instance) =>
@@ -22,4 +24,6 @@ Map<String, dynamic> _$$_LocationModelToJson(_$_LocationModel instance) =>
       'lat': instance.lat,
       'lng': instance.lng,
       'active': instance.active,
+      'lockersCount': instance.lockersCount,
+      'remainingLockers': instance.remainingLockers,
     };

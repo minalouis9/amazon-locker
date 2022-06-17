@@ -67,90 +67,78 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                       key: _formKey,
                       child: Column(
                         children: [
-                          SizedBox(
-                            height: 50.0,
-                            child: TextFormField(
-                              controller: _nameController,
-                              decoration: InputDecoration(
-                                  label: Text('Full Name'), hintText: 'John Smith'),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Can't be empty";
-                                }
-                                return null;
-                              },
-                            ),
+                          TextFormField(
+                            controller: _nameController,
+                            decoration: InputDecoration(
+                                label: Text('Full Name'), hintText: 'John Smith'),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Can't be empty";
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 15.0),
-                          SizedBox(
-                            height: 50.0,
-                            child: TextFormField(
-                              controller: _emailController,
-                              decoration: InputDecoration(
-                                  label: Text('Email'),
-                                  hintText: 'johnsmith@example.com'),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Can't be empty";
-                                }
-                                return null;
-                              },
-                            ),
+                          TextFormField(
+                            controller: _emailController,
+                            decoration: InputDecoration(
+                                label: Text('Email'),
+                                hintText: 'johnsmith@example.com'),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Can't be empty";
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 15.0),
-                          SizedBox(
-                            height: 50.0,
-                            child: TextFormField(
-                              controller: _passwordController,
-                              obscureText: !_isPasswordVisible,
-                              decoration: InputDecoration(
-                                  label: Text('Password'),
-                                  suffixIcon: IconButton(
-                                      onPressed: () => setState(() =>
-                                          _isPasswordVisible = !_isPasswordVisible),
-                                      icon: Icon(_isPasswordVisible
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined))),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Can't be empty";
-                                }
-                                if (value.length < 8) {
-                                  return "Can't be less than 8 characters";
-                                }
-                                return null;
-                              },
-                            ),
+                          TextFormField(
+                            controller: _passwordController,
+                            obscureText: !_isPasswordVisible,
+                            decoration: InputDecoration(
+                                label: Text('Password'),
+                                suffixIcon: IconButton(
+                                    onPressed: () => setState(() =>
+                                        _isPasswordVisible = !_isPasswordVisible),
+                                    icon: Icon(_isPasswordVisible
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined))),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Can't be empty";
+                              }
+                              if (value.length < 8) {
+                                return "Can't be less than 8 characters";
+                              }
+                              return null;
+                            },
                           ),
                           const SizedBox(height: 15.0),
-                          SizedBox(
-                            height: 50.0,
-                            child: TextFormField(
-                              controller: _confirmPasswordController,
-                              obscureText: !_isConfirmPasswordVisible,
-                              decoration: InputDecoration(
-                                  label: Text('Confirm Password'),
-                                  suffixIcon: IconButton(
-                                      onPressed: () => setState(() =>
-                                          _isConfirmPasswordVisible =
-                                              !_isConfirmPasswordVisible),
-                                      icon: Icon(_isConfirmPasswordVisible
-                                          ? Icons.visibility_outlined
-                                          : Icons.visibility_off_outlined))),
-                              autovalidateMode: AutovalidateMode.onUserInteraction,
-                              validator: (value) {
-                                if (value == null || value.isEmpty) {
-                                  return "Can't be empty";
-                                }
-                                if (value != _passwordController.text) {
-                                  return "Password doesn't match";
-                                }
-                                return null;
-                              },
-                            ),
+                          TextFormField(
+                            controller: _confirmPasswordController,
+                            obscureText: !_isConfirmPasswordVisible,
+                            decoration: InputDecoration(
+                                label: Text('Confirm Password'),
+                                suffixIcon: IconButton(
+                                    onPressed: () => setState(() =>
+                                        _isConfirmPasswordVisible =
+                                            !_isConfirmPasswordVisible),
+                                    icon: Icon(_isConfirmPasswordVisible
+                                        ? Icons.visibility_outlined
+                                        : Icons.visibility_off_outlined))),
+                            autovalidateMode: AutovalidateMode.onUserInteraction,
+                            validator: (value) {
+                              if (value == null || value.isEmpty) {
+                                return "Can't be empty";
+                              }
+                              if (value != _passwordController.text) {
+                                return "Password doesn't match";
+                              }
+                              return null;
+                            },
                           ),
                           // const SizedBox(height: 5.0),
                           // Row(
@@ -185,7 +173,10 @@ class _LoginScreenState extends ConsumerState<RegisterScreen> {
                                       content: Text(result),
                                     ));
                                   }else{
-                                    Navigator.pushNamedAndRemoveUntil(context, RoutePaths.homeScreen, (route) => false);
+                                    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                                      content: Text("You have registered successfully.\nPlease login!"),
+                                    ));
+                                    Navigator.pushNamedAndRemoveUntil(context, RoutePaths.loginScreen, (route) => false);
                                   }
                                 }else{
                                   setState(() => _loading = false);

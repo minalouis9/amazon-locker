@@ -26,13 +26,17 @@ class _$LocationModelTearOff {
       required String name,
       required double lat,
       required double lng,
-      required int active}) {
+      required int active,
+      required int lockersCount,
+      required int remainingLockers}) {
     return _LocationModel(
       id: id,
       name: name,
       lat: lat,
       lng: lng,
       active: active,
+      lockersCount: lockersCount,
+      remainingLockers: remainingLockers,
     );
   }
 
@@ -51,6 +55,8 @@ mixin _$LocationModel {
   double get lat => throw _privateConstructorUsedError;
   double get lng => throw _privateConstructorUsedError;
   int get active => throw _privateConstructorUsedError;
+  int get lockersCount => throw _privateConstructorUsedError;
+  int get remainingLockers => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -63,7 +69,14 @@ abstract class $LocationModelCopyWith<$Res> {
   factory $LocationModelCopyWith(
           LocationModel value, $Res Function(LocationModel) then) =
       _$LocationModelCopyWithImpl<$Res>;
-  $Res call({int id, String name, double lat, double lng, int active});
+  $Res call(
+      {int id,
+      String name,
+      double lat,
+      double lng,
+      int active,
+      int lockersCount,
+      int remainingLockers});
 }
 
 /// @nodoc
@@ -82,6 +95,8 @@ class _$LocationModelCopyWithImpl<$Res>
     Object? lat = freezed,
     Object? lng = freezed,
     Object? active = freezed,
+    Object? lockersCount = freezed,
+    Object? remainingLockers = freezed,
   }) {
     return _then(_value.copyWith(
       id: id == freezed
@@ -104,6 +119,14 @@ class _$LocationModelCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as int,
+      lockersCount: lockersCount == freezed
+          ? _value.lockersCount
+          : lockersCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      remainingLockers: remainingLockers == freezed
+          ? _value.remainingLockers
+          : remainingLockers // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -115,7 +138,14 @@ abstract class _$LocationModelCopyWith<$Res>
           _LocationModel value, $Res Function(_LocationModel) then) =
       __$LocationModelCopyWithImpl<$Res>;
   @override
-  $Res call({int id, String name, double lat, double lng, int active});
+  $Res call(
+      {int id,
+      String name,
+      double lat,
+      double lng,
+      int active,
+      int lockersCount,
+      int remainingLockers});
 }
 
 /// @nodoc
@@ -136,6 +166,8 @@ class __$LocationModelCopyWithImpl<$Res>
     Object? lat = freezed,
     Object? lng = freezed,
     Object? active = freezed,
+    Object? lockersCount = freezed,
+    Object? remainingLockers = freezed,
   }) {
     return _then(_LocationModel(
       id: id == freezed
@@ -158,6 +190,14 @@ class __$LocationModelCopyWithImpl<$Res>
           ? _value.active
           : active // ignore: cast_nullable_to_non_nullable
               as int,
+      lockersCount: lockersCount == freezed
+          ? _value.lockersCount
+          : lockersCount // ignore: cast_nullable_to_non_nullable
+              as int,
+      remainingLockers: remainingLockers == freezed
+          ? _value.remainingLockers
+          : remainingLockers // ignore: cast_nullable_to_non_nullable
+              as int,
     ));
   }
 }
@@ -170,7 +210,9 @@ class _$_LocationModel implements _LocationModel {
       required this.name,
       required this.lat,
       required this.lng,
-      required this.active});
+      required this.active,
+      required this.lockersCount,
+      required this.remainingLockers});
 
   factory _$_LocationModel.fromJson(Map<String, dynamic> json) =>
       _$$_LocationModelFromJson(json);
@@ -185,10 +227,14 @@ class _$_LocationModel implements _LocationModel {
   final double lng;
   @override
   final int active;
+  @override
+  final int lockersCount;
+  @override
+  final int remainingLockers;
 
   @override
   String toString() {
-    return 'LocationModel(id: $id, name: $name, lat: $lat, lng: $lng, active: $active)';
+    return 'LocationModel(id: $id, name: $name, lat: $lat, lng: $lng, active: $active, lockersCount: $lockersCount, remainingLockers: $remainingLockers)';
   }
 
   @override
@@ -200,11 +246,16 @@ class _$_LocationModel implements _LocationModel {
             (identical(other.name, name) || other.name == name) &&
             (identical(other.lat, lat) || other.lat == lat) &&
             (identical(other.lng, lng) || other.lng == lng) &&
-            (identical(other.active, active) || other.active == active));
+            (identical(other.active, active) || other.active == active) &&
+            (identical(other.lockersCount, lockersCount) ||
+                other.lockersCount == lockersCount) &&
+            (identical(other.remainingLockers, remainingLockers) ||
+                other.remainingLockers == remainingLockers));
   }
 
   @override
-  int get hashCode => Object.hash(runtimeType, id, name, lat, lng, active);
+  int get hashCode => Object.hash(
+      runtimeType, id, name, lat, lng, active, lockersCount, remainingLockers);
 
   @JsonKey(ignore: true)
   @override
@@ -223,7 +274,9 @@ abstract class _LocationModel implements LocationModel {
       required String name,
       required double lat,
       required double lng,
-      required int active}) = _$_LocationModel;
+      required int active,
+      required int lockersCount,
+      required int remainingLockers}) = _$_LocationModel;
 
   factory _LocationModel.fromJson(Map<String, dynamic> json) =
       _$_LocationModel.fromJson;
@@ -238,6 +291,10 @@ abstract class _LocationModel implements LocationModel {
   double get lng;
   @override
   int get active;
+  @override
+  int get lockersCount;
+  @override
+  int get remainingLockers;
   @override
   @JsonKey(ignore: true)
   _$LocationModelCopyWith<_LocationModel> get copyWith =>

@@ -16,10 +16,7 @@ class Logo extends ConsumerWidget {
 
     return Hero(
       tag: 'logo',
-      child: Image.asset(
-        themeController.themeMode == ThemeMode.light
-            ? 'assets/logo.png'
-            : 'assets/logo1.png',
+      child: Image.asset('assets/logo.png',
         width: width ?? 150.0,
         height: height ?? 150.0,
       ),

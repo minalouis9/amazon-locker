@@ -34,6 +34,8 @@ LocationModel fromOrderLocationJson(Map json){
     lat: (json['lat'] as num).toDouble(),
     lng: (json['lng'] as num).toDouble(),
     active: boolToInt(json['active'] as bool),
+    lockersCount: json['lockersCount'] as int,
+    remainingLockers: json['remainingLockers'] as int,
   );
 }
 

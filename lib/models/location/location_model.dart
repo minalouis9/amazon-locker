@@ -14,7 +14,7 @@ class LocationModel with _$LocationModel {
         required String name,
         required double lat,
         required double lng,
-        required int active}) = _LocationModel;
+        required int active, required int lockersCount, required int remainingLockers}) = _LocationModel;
 
   factory LocationModel.fromJson(Map<String, dynamic> json) =>
       _$LocationModelFromJson(json);

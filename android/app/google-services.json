@@ -29,6 +29,13 @@
             {
               "client_id": "877407473588-bqm5e4n253lm8bo1t95ek71os96khjob.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "877407473588-b57dm0p29t6bscle40ffvgtcc75mslnr.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.amazonLocker"
+              }
             }
           ]
         }

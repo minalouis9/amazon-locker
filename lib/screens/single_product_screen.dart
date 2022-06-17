@@ -45,8 +45,7 @@ class _SingleProductScreenState extends ConsumerState<SingleProductScreen> {
             widget.product.description,
             style: TextStyle(
                 fontSize: 15.0,
-                fontWeight: FontWeight.w300,
-                color: Color(0xFFAEB1C1)),
+                fontWeight: FontWeight.w300),
           ),
           Expanded(
             child: Row(

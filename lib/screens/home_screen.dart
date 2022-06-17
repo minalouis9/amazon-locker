@@ -219,50 +219,50 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
                       child: SingleChildScrollView(
                         child: Column(
                           children: [
-                            // TextButton(
-                            //     key: UniqueKey(),
-                            //     style: TextButton.styleFrom(
-                            //       primary: Colors.white,
-                            //       backgroundColor: Colors.blue,
-                            //       shape: RoundedRectangleBorder(
-                            //         borderRadius: BorderRadius.circular(10.0)
-                            //       ),
-                            //       fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
-                            //     ),
-                            //     onPressed: () {
-                            //       // Navigator.pop(context);
-                            //       ref.read(appThemeProvider).changeAppTheme();
-                            //     },
-                            //     child: Row(
-                            //       children: [
-                            //         Icon(Icons.brightness_4_outlined),
-                            //         const SizedBox(width: 10.0),
-                            //         Expanded(child: Text('Change theme')),
-                            //         Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
-                            //       ],
-                            //     )),
                             TextButton(
                                 key: UniqueKey(),
                                 style: TextButton.styleFrom(
-                                    primary: Colors.white,
-                                    backgroundColor: Colors.blue,
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(10.0)
-                                    ),
-                                    fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
+                                  primary: Colors.white,
+                                  backgroundColor: Colors.blue,
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(10.0)
+                                  ),
+                                  fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
                                 ),
                                 onPressed: () {
-                                  Navigator.pop(context);
-                                  Navigator.pushNamed(context, RoutePaths.allLocationsScreen);
+                                  // Navigator.pop(context);
+                                  ref.read(appThemeProvider).changeAppTheme();
                                 },
                                 child: Row(
                                   children: [
-                                    Icon(Icons.pin_drop_outlined),
+                                    Icon(Icons.brightness_4_outlined),
                                     const SizedBox(width: 10.0),
-                                    Expanded(child: Text('All Locations')),
+                                    Expanded(child: Text('Change theme')),
                                     Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
                                   ],
                                 )),
+                            // TextButton(
+                            //     key: UniqueKey(),
+                            //     style: TextButton.styleFrom(
+                            //         primary: Colors.white,
+                            //         backgroundColor: Colors.blue,
+                            //         shape: RoundedRectangleBorder(
+                            //             borderRadius: BorderRadius.circular(10.0)
+                            //         ),
+                            //         fixedSize: Size(MediaQuery.of(context).size.width, 40.0)
+                            //     ),
+                            //     onPressed: () {
+                            //       Navigator.pop(context);
+                            //       Navigator.pushNamed(context, RoutePaths.allLocationsScreen);
+                            //     },
+                            //     child: Row(
+                            //       children: [
+                            //         Icon(Icons.pin_drop_outlined),
+                            //         const SizedBox(width: 10.0),
+                            //         Expanded(child: Text('All Locations')),
+                            //         Icon(Icons.arrow_forward_ios_outlined, size: 15.0,)
+                            //       ],
+                            //     )),
                             TextButton(
                                 key: UniqueKey(),
                                 style: TextButton.styleFrom(
