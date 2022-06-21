@@ -8,69 +8,6 @@ class ApiHelper {
 
   ApiHelper({required this.networkController});
 
-  ///////////////////////// GENERAL /////////////////////////
-  Future<dynamic> performRequest(
-      {required String path,
-      required String method,
-      CancelToken? cancelToken,
-      Map<String, dynamic>? queryParam,
-      Map<String, dynamic>? body,
-      Map<String, String?>? headers,
-      Map<String, dynamic>? files,
-      bool useBaseUrl = true,
-      bool returnFormattedData = true,
-      bool monitorSendProgress = false,
-      bool monitorReceiveProgress = false}) async {
-    switch (method) {
-      case "GET":
-        return await networkController.getData(
-            path: path,
-            useBaseUrl: useBaseUrl,
-            returnFormattedResponse: returnFormattedData,
-            cancelToken: cancelToken,
-            queryParam: queryParam,
-            headers: headers);
-      case "POST":
-        return await networkController.postData(
-            path: path,
-            useBaseUrl: useBaseUrl,
-            returnFormattedResponse: returnFormattedData,
-            cancelToken: cancelToken,
-            queryParam: queryParam,
-            body: body,
-            headers: headers,
-            files: files,
-            monitorReceiveProgress: monitorReceiveProgress,
-            monitorSendProgress: monitorReceiveProgress);
-      case "PUT":
-        return await networkController.putData(
-            path: path,
-            useBaseUrl: useBaseUrl,
-            returnFormattedResponse: returnFormattedData,
-            cancelToken: cancelToken,
-            queryParam: queryParam,
-            body: body,
-            headers: headers,
-            files: files);
-      case "DELETE":
-        return await networkController.deleteData(
-            path: path,
-            useBaseUrl: useBaseUrl,
-            returnFormattedResponse: returnFormattedData,
-            cancelToken: cancelToken,
-            queryParam: queryParam,
-            headers: headers);
-      default:
-        return await networkController.getData(
-            path: path,
-            useBaseUrl: useBaseUrl,
-            returnFormattedResponse: returnFormattedData,
-            cancelToken: cancelToken,
-            queryParam: queryParam,
-            headers: headers);
-    }
-  }
-
   Future login({required String email, required String password}) async {
     return networkController.postData(
         path: '/auth/login', body: {'email': email, 'password': password});
